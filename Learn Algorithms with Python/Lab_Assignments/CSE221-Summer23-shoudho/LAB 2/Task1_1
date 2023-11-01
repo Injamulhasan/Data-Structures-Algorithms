@@ -1,0 +1,29 @@
+#O(n^2)
+f = open("input1_1.txt", "r")
+f1 = open("output1_1.txt", "w")
+
+T = f.readlines()
+a, b =T[0].split()
+a = int(a)
+b = int(b)
+
+num=T[1].split()
+for i in range(len(num)):
+    num[i] = int(num[i])
+
+flag = 0
+for i in range(a):
+    for j in range(a):
+        if j!=i:
+            if (num[i]+num[j])==b:
+                f1.write(str(i+1) + " " +str(j+1)+"\n")
+                flag = 1
+                break
+    if flag:
+        break
+if flag!=1:
+    f1.write("IMPOSSIBLE\n")
+
+f.close()
+f1.close()
+

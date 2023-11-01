@@ -1,0 +1,176 @@
+class Node:
+    
+    def __init__(self, e, n): 
+        self.element = e
+        self.next = n
+
+class LinkedList:
+
+  def __init__(self, a):
+    self.head = Node(a[0],None)
+    tail = self.head
+
+    for i in range(1,len(a)):
+      n=Node(a[i],None)
+      tail.next=n
+      tail=tail.next
+
+  def countNode(self):
+        
+      count=0
+      temp=self.head
+      while temp!=None:
+        temp=temp.next
+        count+=1
+      
+      return count
+
+  def printList(self):    
+        
+    temp=self.head
+    while temp!=None:
+      print(temp.element,end=" ")
+      temp=temp.next
+        
+    print()
+
+  def nodeAt(self, idx):    
+    count=0
+    temp=self.head
+    while temp!=None:
+      if(count==idx):
+        return temp
+      count+=1
+      temp=temp.next
+
+  def get(self, idx):
+    count=0
+    last_idx=self.countNode()
+    temp=self.head
+    while temp!=None:
+      if(count==idx):
+        return temp.element
+      count+=1
+      temp=temp.next
+
+    def set(self, idx, elem):
+        
+      temp=self.head
+      count=0
+      n=Node(elem,None)
+      if idx<0 or idx>self.countNode():
+        return "invalid"
+      while temp!=None:
+        if count==idx:
+          f=temp.element
+          n=Node(elem,None)
+          n1=self.nodeAt(idx-1)
+          n2=self.nodeAt(idx+1)
+          n1.next=n
+          n.next=n2
+          count+=1
+          temp=temp.next
+                
+      return f
+
+
+    def indexOf(self, elem):
+        c=self.head
+        count=0
+        while c :
+            if count==elem:
+                return c.e
+            count+=1
+            c=c.next
+
+
+    def contains(self, elem):
+    
+        count=0
+        temp=self.head
+        while temp!=None:
+            if(temp.element==elem):
+                return True
+
+
+    def copyList(self):
+        newhead=Node(self.elem,None)
+        tail=newhead
+        temp=self.next
+        while temp!=None:
+            n=Node(temp.elem,None)
+            tail.next=n
+            tail=tail.next
+            temp=temp.next
+        return newhead
+
+
+
+
+    def reverseList(self):
+        rH=Node(self.elem,None)
+        temp=self.next
+        while temp!=None:
+            n=Node(temp.elem,rH)
+            rH=n
+            temp=temp.next
+        return rH
+
+    def insert(self, elem, idx):
+        temp=self.head
+        count=0
+        lst_idx=self.countNode()
+        if idx >=0 and idx<=lst_idx:
+            while temp!=None:
+                if count==idx:
+                    n=Node(elem,None)
+                    n1=Node(self.head,idx)
+                    n2=Node(self.head,idx-1)
+                    n.next=n1
+                    n2.next=n
+
+    def remove(self,idx):
+        temp = None
+        if self.head == idx:
+            self.head = self.head.next
+            temp = str(self.head)
+            str_value = temp+"was removed from the linked list"
+            return str_value
+        else:
+            temp1 = self.head
+            while temp1.next is not None:
+                if temp1.next.value == idx:
+                    temp = temp1.next.value
+                    break
+                temp1 = temp1.next
+            if temp1.next is None:
+                return None
+            else:
+                temp1.next = temp1.next.next
+                return None
+
+
+    def rotateLeft(self,rotate_position,k):
+        if rotate_position == "left":
+            for x in range(k):
+                temp = self.head
+                self.head = self.head.next
+                temp.next = None
+                position = self.head
+                while position.next != None:
+                    position = position.next
+            position.next = temp
+
+
+    def rotateRight(self):
+        lastNode=self.Head
+        while lastNode!=None:
+            if lastNode==None:
+                break
+        s_ln=self.head
+        while s_ln !=None:
+            if s_ln.next==lastNode:
+                break
+            lastNode.next=self.head
+            s_ln.next=None
+            self.head=lastNode

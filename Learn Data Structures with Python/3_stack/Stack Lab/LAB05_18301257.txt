@@ -1,0 +1,139 @@
+#TASK01
+
+opening = ["[",'{',"("]
+closing = ["]","}",")"]
+stack = []
+idx = []
+
+def paranthesis_balancing(string):
+    k = 0
+    expression = True
+    
+    for i in range(0,len(string)):
+        if string[i] in opening or string[i] in closing:
+            if string[i] in opening:
+                stack.append(string[i])
+                idx.append(i+1)
+            else:
+                if len(stack) == 0 and string[i] in closing:
+                    k = string[i]
+                    idx.append(i+1)
+                    expression = False
+                    break
+
+                k = stack.pop()
+                expression = bracket_checking(k,string[i])
+                if expression == True:
+                    idx.pop()
+    
+    if expression is True:
+        print("This expression is correct.")
+                
+    else:
+        if len(stack) != 0:
+            print('This expression is NOT correct.')
+            print("Error at character # {0}. '{1}'- not closed.".format(idx[-1],k))       
+        else:
+            if expression is False: 
+                print('This expression is NOT correct.')
+                print("Error at character # {0}. '{1}'- not opened.".format(idx[0],k))
+
+def bracket_checking(a,b):
+    if a == "(" and b == ")":
+        return True
+    elif a == "{" and b == "}":
+        return True
+    elif a == "[" and b =="]":
+        return True
+    else:
+        return False
+
+string = input()
+paranthesis_balancing(string)
+
+#TASK02
+
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+class linkedlist:
+    def __init__(self):
+        self.head = None
+    def push(self,element):
+        if self.head == None:
+            self.head = Node(element)
+        else:
+            new = self.head
+            while new.next != None:
+                new = new.next
+            new.next = Node(element)
+
+    def pop(self):
+        global list_status
+        global available
+        if self.head == None:
+            list_status = "Empty"
+            available = None
+        else:
+            if self.head.next == None:
+                available = self.head.data
+                self.head = None
+            else:
+                new = self.head
+                while new.next.next is not None:
+                    new = new.next
+                available = new.next.data
+                new.next = None
+
+opening = ["[",'{',"("]
+closing = ["]","}",")"]
+
+def bracket_checking(a,b):
+    if a == "(" and b == ")":
+        return True
+    elif a == "{" and b == "}":
+        return True
+    elif a == "[" and b == "]":
+        return True
+    else:
+        return False
+
+check = linkedlist()
+string = input()
+expression = False
+idx = []
+k = 1
+x = 0
+y = ""
+
+for i in string:
+    if i in opening:
+        check.push(i)
+        idx.append(k)
+    if i in closing:
+        check.pop()
+        if available == None:
+            expression = False
+            x = k
+            y = i
+            break
+        else:
+            expression = bracket_checking(available,i)
+            if expression == True:
+                idx.pop()
+            else:
+                x = idx
+                y = available
+    k = k+1
+
+if expression is True:
+    print('This expression is correct.')
+else:
+    if isinstance(x,list):        #The isinstance() function returns True if the specified object is of the specified type, otherwise False
+        print('This expression is NOT correct.')
+        print("Error at character # {0}. '{1}'- not closed.".format(x[-1], y))
+    else:
+        print('This expression is NOT correct.')
+        print("Error at character # {0}. '{1}'- not opened.".format(x, y))

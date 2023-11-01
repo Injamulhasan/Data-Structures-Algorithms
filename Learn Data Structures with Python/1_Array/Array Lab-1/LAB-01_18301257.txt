@@ -1,0 +1,204 @@
+#1
+
+source=[10,20,30,40,50,60]
+size=len(source)
+def shiftleft(source,k):
+    for i in range(k):
+        for j in range(size-1):
+            source[j]=source[j+1]
+        source[size-1]=0
+k=3
+shiftleft(source,k)
+print(source)
+
+
+#2
+
+source=[10,20,30,40,50,60]
+def rotateLeft(source,k):
+    
+    for i in range(0, k):
+            first = source[0]
+            for j in range(0,len(source)-1):
+                source[j] = source[j+1]
+            source[len(source)-1] = first
+k=3
+rotateLeft(source,k)
+print(source)
+
+
+#3
+
+source=[10,20,30,40,50,60]
+size=len(source)
+def shiftright(source,k):
+    for i in range(k):
+        for j in range(size-1,-1,-1):
+            source[j]=source[j-1]
+        source[0]=0
+k=3
+shiftright(source,k)
+print(source)
+
+
+#4
+
+source=[10,20,30,40,50,60]
+size=len(source)-1
+def rotateright(source,k):
+    
+    for i in range(k):
+            last = source[size-1]
+            for j in range(size-1,-1,-1):
+                source[j] = source[j-1]
+            source[0] = last
+            
+k=3
+rotateright(source,k)
+print(source)
+
+
+
+#5
+
+source=[10,20,30,40,50,0,0]
+
+def remove(source,size,idx):
+    
+    source_idx = len(source)
+    new = source_idx * [0]
+    x = 0
+    
+    for i in range(size):
+        if i == idx:
+            continue
+        else:
+            new[x] = source[i]
+            x += 1            
+    source = new
+    
+    print(source)
+
+remove(source,5,2)
+
+
+#6
+
+source = [10, 2, 30, 2, 50, 2, 2, 0, 0]
+
+def removeAll(source, size, element):
+    s_idx = len(source)
+    new = [0] * s_idx
+    x = 0
+    for i in source:
+        if i == element:
+            continue
+        else:
+            new[x] = i
+        x += 1
+        if x >= size:
+            break
+    source = new
+    print(source)
+
+removeAll(source, 7, 2)
+
+
+
+#7
+
+def SplittingArray(A):
+    zero_list = [0]
+    empty_list = []
+    A_lentgh = len(A)
+    logic = None
+    for i in range(A_lentgh):
+        if i == 0:
+            zero_list[i] = A[i]
+            empty_list = A[i+1:(A_lentgh)]
+            if sum(zero_list) == sum(empty_list):
+                logic = True
+                break
+            else:
+                zero_list = []
+                logic = False
+        else:
+            zero_list = A[0:i+1]
+            empty_list = A[i + 1:(A_lentgh)]
+            if sum(zero_list) == sum(empty_list):
+                logic = True
+                break
+            else:
+                logic = False
+    print(logic)
+
+A = [10, 3, 1, 2, 10]
+SplittingArray(A)
+
+
+
+
+
+#8
+
+def arraySeries(n):
+    sq = n*n
+    new_a = [0]*sq
+
+    x = 1
+    while x <= n:
+        y = 1
+        while y <= x:
+            new_a[(x*n)-y] = y
+
+            y += 1
+        x += 1
+    return new_a
+
+
+n = int(input("n= "))
+print(arraySeries(n))
+
+
+
+
+#9
+
+new_ar = [1, 2, 2, 3, 4, 4, 4]
+
+def MaxBunchCount(new_ar):
+   
+    sum_list = []
+    first = new_ar[0]
+    count = 0
+    for values in new_array:
+        if values == first:
+            count += 1
+        else:
+            first = values
+            count = 1
+        sum_list.append(count)
+        
+    print(max(sum_list))
+
+MaxBunchCount(new_ar)
+
+
+
+
+#10
+
+new_arr = [4,5,6,6,4,3,6,4]
+
+def repetition(new_array):
+    new = []
+    dic = {x: new_arr.count(x) for x in new_arr}
+    for keys, val in dic.items():
+        if val > 1:
+            new.append(val)
+    if len(new) == len(set(new)):
+        print("False")
+    else:
+        print("True")
+
+repetition(new_arr)

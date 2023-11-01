@@ -1,0 +1,214 @@
+# Task 1 
+# a
+
+def facto(n):
+    if n == 1 :
+        return 1
+    else:
+        return n * facto(n-1)
+
+
+print(facto(6))
+
+# b
+
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+
+fib = fibonacci(4)
+print(fib)
+
+# c
+
+def pA(arr, i):
+    if i == len(arr):
+        return
+    else:
+        print(arr[i])
+        pA(arr, i+1)
+
+
+arr = [1, 2, 3, 4, 5, 7]
+pA(arr,0)
+
+# task 2  
+# a
+
+def dtob(n):
+    if n == 0:
+        return 0
+    else:
+        return dtob(n//2)*10 + (n % 2)
+
+
+d = dtob(11)
+print(d)
+
+# b
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+class llist:
+    def __init__(self, a):
+        self.head = None
+        tail = None
+        for i in array:
+            new = Node(i)
+            if self.head == None:
+                self.head = new
+                tail = new
+            else:
+                tail.next = new
+                tail = new
+
+    def sumation(self):
+        return self.add(self.head)
+
+    def add(self, head):
+        if head == None:
+            return 0
+        else:
+            return head.val + self.add(head.next)
+
+
+
+a = [4, 5, 6, 7 ,8 ,9]
+l = llist(a)
+print(l.sumation())
+
+# c
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+class llist:
+    def __init__(self, array):
+        self.head = None
+        tail = None
+        for i in array:
+            new = Node(i)
+            if self.head == None:
+                self.head = new
+                tail = new
+            else:
+                tail.next = new
+                tail = new
+
+    def reverseOder(self, head):
+        if head.next == None:
+            print(head.val)
+        else:
+            self.reverseOder(head.next)
+            print(head.val)
+
+    def Rprint(self):
+        return self.reverseOder(self.head)
+
+
+arr = [10,20,30,40]
+l = llist(arr)
+l.Rprint()
+
+# task 3  
+
+def hocBuilder(height):
+    if height == 0:
+        return 0
+    elif height == 1:
+        return 8
+    else:
+        return 5+hocBuilder(height-1)
+
+
+height = 5
+print(hocBuilder(height))
+
+# task 4 
+# a
+
+def ptrn(x):
+    if x == 0:
+        return 0
+    else:
+        ptrn(x-1)
+        print(x, end="")
+
+
+def printP(x):
+    if x == 0:
+        return 0
+    else:
+        printP(x-1)
+    ptrn(x)
+    print()
+
+
+x = 5
+
+printP(x)
+
+# b
+
+def pTRN(n):
+    if n == 0:
+        return 0
+    else:
+        pTRN(n-1)
+        print(n, end="")
+
+
+def reverseP(n):
+    if n == 0:
+        return 0
+    else:
+        reverseP(n - 1)
+        print("", end=" ")
+
+def printP(n, m):
+    if n == 0:
+        return 0
+    else:
+        reverseP(n-1)
+        pTRN((m)-n+1)
+        print()
+        printP(n-1, m)
+
+printP(5,5)
+
+# task 5
+
+class FinaIQ:
+
+    def print(self, a, i):
+        if(i< len(a)):
+            p = self.calculateProfit(a[i])
+            print(str(i+1),"Investment:",a[i],"; Profit:", p)
+            self.print(a,i+1)
+
+    def calculateProfit(self, invest):
+        if invest <= 25000:
+            return 0.0
+        elif invest > 25000 and invest <= 100000:
+            return 45 + self.calculateProfit(invest-1000)
+        elif invest > 100000:
+            return 80 + self.calculateProfit(invest-1000)
+        else:
+            return 0
+
+#tester
+a = [25000, 100000, 250000, 350000]
+f = FinaIQ()
+f.print(a, 0)

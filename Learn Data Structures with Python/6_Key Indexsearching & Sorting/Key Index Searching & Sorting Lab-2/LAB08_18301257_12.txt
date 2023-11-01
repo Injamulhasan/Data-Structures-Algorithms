@@ -1,0 +1,250 @@
+#1
+
+def rec_sel_srt(arr, a, b):
+    idx = len(arr)
+    if a < idx-1:
+        minidx = a
+        rec_sel_srt(arr, a + 1, a + 2)
+        if b < idx:
+            if arr[b] < arr[minidx]:
+                minidx = b
+            rec_sel_srt(arr, a, b+1)
+        arr[a], arr[minidx] = arr[minidx], arr[a]
+
+
+arr = [ 7, 8, 3, 6, 9, 4, 5, 1]
+rec_sel_srt(arr, 0, 1)
+print(arr)
+
+
+
+#2
+
+
+def insort(arr, idx):
+    if idx <= 1:
+        return -1
+    insort(arr, idx-1)
+    a = idx - 2
+    b = arr[idx - 1]
+    while (arr[a] > b and a >= 0):
+        arr[a+1] = arr[a]
+        a -= 1
+    arr[a+1] = b
+
+
+arr = [7, 8, 3, 6, 9, 4, 5, 1]
+idx = len(arr)
+insort(arr, idx)
+print(arr)
+
+
+#3
+
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+class myylist:
+    def __init__(self, i):
+        self.head = None
+        tail = None
+
+        for m in i:
+            nnode = Node(m)
+            if self.head == None:
+                self.head = nnode
+                tail = nnode
+
+            else:
+                tail.next = nnode
+                tail = nnode
+
+    def slist(self):
+        tem = self.head
+        if tem == None:
+            print("Empty")
+        else:
+            while tem != None:
+                if tem.next == None:
+                    print(tem.val)
+                    break
+                else:
+                    print(tem.val, end=" ")
+                    tem = tem.next
+
+    def bblsort(self):
+        head = self.head
+        tail = None
+        if self.head == None:
+            return
+        else:
+            while head != None:
+                tail = head.next
+                while tail != None:
+                    if tail.val < head.val:
+                        head.val, tail.val = tail.val, head.val
+                    tail = tail.next
+                head = head.next
+
+
+array = [7, 8, 3, 6, 9, 4, 5, 1] 
+l= myylist(array)
+l.bblsort()
+l.slist()
+
+
+
+#4
+
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+class myylist:
+    def __init__(self, j):
+        self.head = None
+        tail = None
+
+        for i in j:
+            nnode = Node(i)
+            if self.head == None:
+                self.head = nnode
+                tail = nnode
+
+            else:
+                tail.next = nnode
+                tail = nnode
+
+    def slist(self):
+        tem = self.head
+        if tem == None:
+            print("Empty List")
+        else:
+            while tem != None:
+                if tem.next == None:
+                    print(tem.val)
+                    break
+                else:
+                    print(tem.val, end=" ")
+                    tem = tem.next
+
+    def selsort(self):
+        head = self.head
+        if self.head == None:
+            return
+        else:
+            while head.next != None:
+                tail = head
+                val = head.val
+                nextvalue = head.next
+                while nextvalue != None:
+                    if val > nextvalue.val:
+                        val = nextvalue.val
+                        tail = nextvalue
+                    nextvalue = nextvalue.next
+                head.val, tail.val = tail.val, head.val
+                head = head.next
+
+
+arr = [7, 8, 3, 6, 9, 4, 5, 1]
+l=myylist(arr)
+l.selsort()
+l.slist()
+
+
+
+# task 5
+
+class Node:
+
+    def __init__(self, val, next, previous):
+        self.val = val
+        self.next = next
+        self.previous = previous
+
+class dl_list:
+
+    def __init__(self, arr):
+        self.head = Node(arr[0], None, None)
+        tail = self.head
+        for i in range(1, len(arr)):
+            nnode = Node(arr[i], None, tail)
+            tail.next = nnode
+            tail = nnode
+
+    def s_list(self):
+        if self.head.next == None:
+            print("Empty list")
+        else:
+            head = self.head
+            while self.head != None:
+                if head.next == None:
+                    print(head.val)
+                    break
+                else:
+                    print(head.val, end=" ")
+                    head = head.next
+
+    def insertsort(self):
+        head = self.head
+        if head == None:
+            return
+        else:
+            while head != None:
+                tail = head.next
+                while tail and tail.previous != None and tail.val < tail.previous.val:
+                    tail.val, tail.previous.val = tail.previous.val, tail.val
+                    tail = tail.previous
+                head = head.next
+
+
+arr = [7, 8, 3, 6, 9, 4, 5, 1]
+dl_list = dl_list(arr)
+dl_list.insertsort()
+dl_list.s_list()
+
+
+
+#6
+
+def bsearch(arr, l, r, v):
+    if l > r:
+        return -1
+    else:
+        midval = int((l+r) // 2)
+        if arr[midval] < v:
+            return bsearch(arr, midval+1, r, v)
+        elif arr[midval] > v:
+            return bsearch(arr, l, midval-1, v)
+        else:
+            return midval
+
+
+arr = [7, 8, 3, 6, 9, 4]
+l = 0
+r = len(arr)
+v = 6
+print(bsearch(arr, l, r, v))
+
+
+
+#7
+
+def fib(n):
+    if n == 0 or n == 1:
+        return n
+    else:
+        if arr[n] == -1:
+            arr[n] = fib(n-1) + fib(n-2)
+        return arr[n]
+
+arr = [-1]*99
+fibonacci = fib(8)
+print(fibonacci) 
